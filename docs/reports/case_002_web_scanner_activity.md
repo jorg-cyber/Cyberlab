@@ -64,7 +64,7 @@ UFW telemetry corroborated repeated probing/connection attempts from the Kali VM
 
 ## 5) Triage notes (what I checked)
 - **Data source:** Suricata alert telemetry corroborated by UFW blocks.
-- **What happened:** Web-scanner-style probing / exploit-pattern testing against a web app service (Juice Shop).
+- **What happened:** Web-scanner-style probing against a web app service (Juice Shop) — payload patterns included SQLi, RFI, and PHP injection.
 - **Who did it (source):** 192.168.68.117 (Kali VM).
 - **What was targeted:** SOA (192.168.68.112), specifically the web app service on TCP/3000.
 - **How loud / pattern:** Burst-style alert clusters with multiple distinct web signatures (scan/probe/exploit-pattern behavior).
@@ -73,20 +73,28 @@ UFW telemetry corroborated repeated probing/connection attempts from the Kali VM
 
 ---
 
-## 6) Response (lab note + real-org playbook)
-**Lab note:** Authorized test (I initiated the scan). No containment/remediation applied.
-
-**If this was *not* authorized in a real org:**
-- **Contain it:** Block or rate-limit the source at the closest control point (WAF/reverse proxy, host firewall, network firewall, NAC). If internal, isolate the endpoint (EDR containment / VLAN quarantine).
-- **Scope it:** Search for the same source hitting other internal web assets; look for similar Suricata web bursts (ET WEB_SERVER / ET HUNTING) across the environment.
-- **Investigate follow-on:** Pivot from the alert window into:
-  - web server/app logs (errors, auth failures, suspicious endpoints),
-  - endpoint telemetry on the target (process creation, file writes, suspicious child processes),
-  - any outbound connections or persistence indicators post-burst.
-- **Reduce risk:** Validate exposure and segmentation (who can reach web services), apply least-privilege network policy, and ensure only intended services are reachable.
+## 6) MITRE ATT&CK mapping
+- **Tactic:** Reconnaissance
+- **Technique:** [T1595.002 - Active Scanning: Vulnerability Scanning](https://attack.mitre.org/techniques/T1595/002/)
+- **Rationale:** Suricata showed repeated web attack signature bursts against OWASP Juice Shop on TCP/3000, including SQL injection, remote file inclusion, and PHP-related payload patterns, consistent with automated vulnerability scanning rather than normal browsing.
 
 ---
 
-## 7) Related artifacts
+## 7) Response (lab note + real-org playbook)
+**Lab note:** Authorized test (I initiated the scan). No containment/remediation applied.
+
+**If this was *not* authorized in a real org:**
+
+If I saw this for real, the first thing I'd do is block or rate-limit the source — at the WAF if there is one, otherwise the host firewall or network firewall. If it's an internal machine, that's more concerning and I'd want it isolated (EDR containment or VLAN quarantine) while I figure out what happened.
+
+Next I'd check whether the same source hit any other web services in the environment — same Suricata signature types (ET WEB_SERVER / ET HUNTING), same time window. That tells me if this was targeted at one app or broader.
+
+Then I'd pivot into follow-on activity: did anything actually land? That means checking web server and app logs for errors or suspicious endpoint hits, looking at the target host for unexpected process creation or file writes, and checking for any outbound connections that started after the burst.
+
+Longer term, I'd want to understand why this source could reach the web service at all — is segmentation right, is the app exposed to more of the network than it needs to be.
+
+---
+
+## 8) Related artifacts
 - **DET-008:** [DET-008 Suricata — Web Attack Signature Burst (ET WEB / HUNTING)](../../docs/detections/det_008_suricata_web_attack)
 - **DET-005:** [DET-005 SOA UFW - Top Blocked Sources (Ports/Proto)](../../docs/detections/det_005_ufw_top_blocked_sources.md)

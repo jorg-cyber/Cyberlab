@@ -5,6 +5,8 @@
 **Status:** <Open | Monitoring | Contained | Closed>  
 **Category:** <Recon/Probe | Exploit Attempt | Malware | Credential Attack | Lateral Movement | Other>
 
+**Executive Summary:** <1-3 sentences covering what happened, what was targeted, and the bottom-line outcome.>
+
 ---
 
 ## 1) Trigger
@@ -45,7 +47,14 @@ Answer these explicitly:
 
 ---
 
-## 5) Actions Taken
+## 5) MITRE ATT&CK Mapping
+- **Tactic:** <e.g. Discovery / Credential Access / Initial Access>
+- **Technique:** <Technique ID - Technique Name>
+- **Rationale:** <1-2 sentences explaining why the observed behaviour fits this technique based on the evidence above>
+
+---
+
+## 6) Actions Taken
 What I actually did during the case (or would do in a real org).
 - **Containment:** <none / block / isolate / stop service / reset creds>
 - **Eradication/Hardening:** <config change / rule added / tuning>
@@ -53,14 +62,9 @@ What I actually did during the case (or would do in a real org).
 
 ---
 
-## 6) Lessons Learned / Improvements
+## 7) Lessons Learned / Improvements
 What will I change so the lab gets better next time?
 - <new detection / new dashboard panel / new log source / tuning / parsing fix>
-
----
-
-## 7) Summary
-1–3 sentences: what was observed, where, and the bottom-line outcome (blocked / possible success / confirmed impact).
 
 ---
 

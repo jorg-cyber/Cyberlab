@@ -17,7 +17,6 @@ What caused me to start investigating?
 ---
 
 ## 2) Evidence (Key Artifacts)
-Bullet the *minimum* hard evidence I used.
 - Raw event (Suricata alert): 2026-02-20 15:43:23.268Z — `ET WEB_SERVER /etc/passwd Detected in URI` (category=Attempted Information Leak, action=allowed) from src_ip=192.168.68.117:49742 → dest_ip=192.168.68.112:3000 (http_method=GET, status=400, http.hostname=192.168.68.112, ua=Mozilla/5.0 ... Chrome/74.0.3729.169 ..., url=`%2fn%65%74%67%65t?sid=%75se%72&%6dsg=%33%300&%66%69le=../%2e.%2f..%2f%2e%2e%2f%2e%2e%2f../%2e%2e/.%2e/%2e.%2f.%2e%2fe%74c/%70%61s%73%77d`)
 - Raw event (Suricata alert): 2026-02-20 15:43:04.996Z — `ET INFO Dotted Quad Host TGZ Request` (category=Potentially Bad Traffic, action=allowed) from src_ip=192.168.68.117:32772 → dest_ip=192.168.68.112:3000 (http_method=GET, status=400, http.hostname=192.168.68.112, url=%2f19%32.%31%368.tgz)
 - Source-of-truth (Juice Shop Docker log): 2026-02-20 15:43:25.230Z — `URIError: Failed to decode param` (stderr) while processing a heavily URL-encoded/traversal-style parameter (target host=SOA, sourcetype=docker:json, index=docker)
@@ -25,7 +24,6 @@ Bullet the *minimum* hard evidence I used.
 ---
 
 ## 3) Scope
-What systems/entities are involved?
 - **Primary target:** SOA (Son-of-Anton) — Juice Shop service (TCP 3000) 192.168.68.112:3000
 - **Other affected assets:** none observed
 - **Suspected source:** 192.168.68.117
@@ -35,7 +33,6 @@ What systems/entities are involved?
 ---
 
 ## 4) Triage Analysis
-Answer these explicitly:
 - **What was attempted?**  
   Encoded path traversal / local file disclosure attempts against OWASP Juice Shop (192.168.68.112:3000) from 192.168.68.117, including requests targeting sensitive files (e.g., /etc/passwd, boot.ini) and traversal sequences (../, URL-encoded variants)
 - **Did it succeed? Why/why not?**  
@@ -45,22 +42,24 @@ Answer these explicitly:
 
 ---
 
-## 5) Actions Taken
-What I actually did during the case (or would do in a real org).
+## 5) MITRE ATT&CK mapping
+
+- **Tactic:** Initial Access
+- **Technique:** T1190 - Exploit Public-Facing Application
+- **Rationale:** The activity involved encoded path traversal and local file inclusion style requests targeting sensitive files such as `/etc/passwd` and `boot.ini` against the Juice Shop web application. This is consistent with attempted exploitation of the application rather than normal browsing. The activity was blocked or failed, with HTTP 400 responses and corresponding application error logs showing no successful impact.
+
+---
+
+## 6) Actions Taken
+*What I actually did during the case (or would do in a real org).*
 - **Containment:** None (known internal lab source. Activity stopped after testing)
 - **Eradication/Hardening:** None during this case
 - **Recovery:** Not required
 
 ---
 
-## 6) Lessons Learned / Improvements
-What will I change so the lab gets better next time?
+## 7) Lessons Learned / Improvements
 - Added a Top Signatures — Juice Shop (3000) panel to the Suricata IDS dashboard to speed up triage by immediately showing the most frequent alert signatures for the target service during spikes.
-
----
-
-## 7) Summary
-A burst of Suricata web alerts was observed against OWASP Juice Shop (SOA 192.168.68.112:3000) from 192.168.68.117 within a 1 minute window, including encoded traversal attempts targeting sensitive files (e.g., /etc/passwd). Triage indicates the activity was blocked/failed (HTTP 400 responses and Juice Shop URIError: Failed to decode param), with no impact observed.
 
 ---
 

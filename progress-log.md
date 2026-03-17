@@ -5,6 +5,9 @@ Entries are added as new components are installed, tested, or refined.
 
 
 ---
+## 17-03-2026
+Went through all incident reports, case files, and templates. Fixed inconsistent formatting and a few entries that weren't quite right.
+
 ## 09-03-2026
 IR-003 SSH Brute Force Attempt Detected (Linux Auth Logs) — SOA
 - Published a new incident response report documenting an SSH brute-force style burst detected via Linux auth logs: **[IR-003 — SSH Brute Force Attempt Detected (Linux Auth Logs) – SOA](docs/reports/ir_003_ssh_brute_force_attempt.md)**

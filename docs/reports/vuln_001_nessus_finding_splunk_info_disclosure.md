@@ -79,4 +79,4 @@ Re-test of the same endpoint (no credentials):
 ---
 
 ## 8) Notes
-Splunk’s advisory states versions 6.6.0+ expose this endpoint only to authenticated users; however, local configuration can override that behavior. This exercise shows why vendor advisories + live validation + config review matter.
+Splunk’s advisory states versions 6.6.0+ expose this endpoint only to authenticated users. However, local configuration can override that behavior. That's why vendor advisories, live validation and config review matter.

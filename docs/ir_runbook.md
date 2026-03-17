@@ -72,7 +72,17 @@ Decide one:
 
 ---
 
-## 5) Containment Decision (Minimal + Reversible)
+## 5) Map the Behaviour to MITRE ATT&CK
+**Goal:** describe the observed activity using a standard ATT&CK technique where it clearly fits.
+
+- Identify the most defensible **primary technique**
+- Add a secondary technique only if it adds real analytical value
+- Write a short rationale based on the evidence already collected
+- Do not force a mapping if the activity is better described as a vulnerability, misconfiguration, or engineering issue
+
+---
+
+## 6) Containment Decision (Minimal + Reversible)
 **Goal:** stop the activity without destroying evidence.
 
 Containment options (choose the smallest effective action):
@@ -86,7 +96,7 @@ Always capture evidence first if practical.
 
 ---
 
-## 6) Eradication / Hardening
+## 7) Eradication / Hardening
 **Goal:** remove the cause and reduce repeatability.
 
 Examples:
@@ -97,7 +107,7 @@ Examples:
 
 ---
 
-## 7) Recovery
+## 8) Recovery
 **Goal:** return to normal operations and verify.
 
 - restore service/host to baseline state
@@ -106,7 +116,7 @@ Examples:
 
 ---
 
-## 8) Close-Out (Lessons Learned)
+## 9) Close-Out (Lessons Learned)
 **Goal:** every case improves the lab.
 
 Record:
@@ -131,8 +141,9 @@ Minimum artifacts:
 
 # Cyberlab Pivot Pattern (Tool-Agnostic)
 Pivot logic regardless of tools:
-1) Summary view → raw events
-2) Raw events → scope (who/what/when/how much)
-3) Scope → source-of-truth validation
-4) Validation → decision (blocked / possible / confirmed)
-5) Decision → containment + hardening + close-out
+1) Summary view -> raw events
+2) Raw events -> scope (who/what/when/how much)
+3) Scope -> source-of-truth validation
+4) Validation -> decision (blocked / possible / confirmed)
+5) Decision -> MITRE ATT&CK mapping
+6) Mapping -> containment + hardening + close-out

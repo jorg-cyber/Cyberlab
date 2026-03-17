@@ -5,17 +5,17 @@
 **Status:** Closed
 **Category:** Credential Attack
 
+**Executive Summary:** An SSH brute-force attempt from 192.168.68.117 targeted SOA (192.168.68.112:22), generating 384 failed login attempts in five minutes. No successful access or impact was observed.
+
 ---
 
 ## 1) Trigger
-What caused me to start investigating?
 - **Source:** ALERT-004 Possible SSH Brute Force (Linux Hosts)
 - **Reason it looked suspicious:** spike in failed login attempts
 
 ---
 
 ## 2) Evidence (Key Artifacts)
-Bullet the *minimum* hard evidence I used.
 - 2026-02-22T15:14:45.748675+00:00 SOA sshd[902807]: Failed password for root from 192.168.68.117 port 42100 ssh2
 - 2026-02-22T15:14:45.748096+00:00 SOA sshd[902808]: Failed password for root from 192.168.68.117 port 42114 ssh2
 - 22-02-2026 15:10 to 15:15 - 384 failed login attempts (source: /var/log/auth.log) triggering ALERT-004 Possible SSH Brute Force (Linux Hosts)
@@ -23,7 +23,6 @@ Bullet the *minimum* hard evidence I used.
 ---
 
 ## 3) Scope
-What systems/entities are involved?
 - **Primary target:** SOA `192.168.68.112` SSH port 22
 - **Other affected assets:** none observed
 - **Suspected source:** `192.168.68.117`
@@ -33,32 +32,32 @@ What systems/entities are involved?
 ---
 
 ## 4) Triage Analysis
-Answer these explicitly:
 - **What was attempted?**  
   SSH brute force login attempt at SOA 192.168.68.112 port 22. (High volume attempts)
 - **Did it succeed? Why/why not?**  
-  Failed. No succesful SSH sessions opened from 15:10 and 15:30
+  Failed. No successful SSH sessions opened from 15:10 and 15:30
 - **Impact:**  
   None observed
 
 ---
 
-## 5) Actions Taken
-What I actually did during the case (or would do in a real org).
+## 5) MITRE ATT&CK mapping
+- **Tactic:** Credential Access
+- **Technique:** [T1110.001 - Brute Force: Password Guessing](https://attack.mitre.org/techniques/T1110/001/)
+- **Rationale:** The activity consisted of 384 failed SSH login attempts against the `root` account on SOA from a single source IP within a 5-minute window. This is consistent with automated password guessing rather than normal administrative use and no successful SSH session was observed.
+
+---
+
+## 6) Actions Taken
+*What I actually did during the case (or would do in a real org).*
 - **Containment:** None (In a real org: temporarily block `192.168.68.117`)
 - **Eradication/Hardening:** (In a real org: enforce key-only auth)
 - **Recovery:** Not required
 
 ---
 
-## 6) Lessons Learned / Improvements
-What will I change so the lab gets better next time?
+## 7) Lessons Learned / Improvements
 - Learned that Splunk Fast Mode hides manual field extractions, so SSH triage should be done in Smart Mode.
-
----
-
-## 7) Summary
-An SSH brute-force style password guessing burst was observed against SOA (192.168.68.112:22) from 192.168.68.117, generating 384 failed login attempts between 15:10–15:15 UTC. No evidence of a successful SSH session was observed in the window, so the activity is assessed as blocked/failed with no impact.
 
 ---
 
@@ -74,6 +73,6 @@ An SSH brute-force style password guessing burst was observed against SOA (192.1
 
 ----
 
-## Expolit Screenshot
+## Exploit Screenshot
 
 ![Hydra SSH bruteforce](/assets/ir_003_image_04.png)
