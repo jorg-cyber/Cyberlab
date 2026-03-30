@@ -5,6 +5,9 @@ Entries are added as new components are installed, tested, or refined.
 
 
 ---
+## 30-03-2026
+README file reviewed, reworked, and updated to better reflect the current stage of the Cyberlab with clearer top-level presentation and roadmap alignment.
+
 ## 17-03-2026
 Went through all incident reports, case files, and templates. Fixed inconsistent formatting and a few entries that weren't quite right.
 
