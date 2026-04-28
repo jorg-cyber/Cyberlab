@@ -5,6 +5,16 @@ Entries are added as new components are installed, tested, or refined.
 
 
 ---
+## 28-04-2026
+Windows 11 MD-102 Endpoint Baseline Added to Cyberlab.
+- Built a new disposable Windows 11 Enterprise VM in VMware to serve as the dedicated endpoint for the upcoming MD-102 / endpoint-management integration work
+- Completed the initial base setup:
+    - Windows 11 installed
+    - UEFI / Secure Boot / TPM configured
+    - Hostname set to MD102-W11-01
+    - Clean baseline snapshots created
+    - VMware Tools installed
+
 ## 30-03-2026
 README file reviewed, reworked, and updated to better reflect the current stage of the Cyberlab with clearer top-level presentation and roadmap alignment.
 
