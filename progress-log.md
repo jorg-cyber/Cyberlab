@@ -5,6 +5,13 @@ Entries are added as new components are installed, tested, or refined.
 
 
 ---
+## 05-05-2026
+MD-102 Endpoint Telemetry Added + Developer Sandbox Attempt Failed.
+- Installed Splunk Universal Forwarder on MD102-W11-01
+- Created inputs.conf to enable Windows Event Log forwarding into the md102 index
+- Verified successful telemetry ingestion in Splunk from the new Windows 11 MD-102 endpoint
+- Attempted to obtain a Microsoft 365 Developer Program sandbox, but the sandbox subscription was not granted, so the MD-102 integration will continue via a different tenant setup path
+
 ## 28-04-2026
 Windows 11 MD-102 Endpoint Baseline Added to Cyberlab.
 - Built a new disposable Windows 11 Enterprise VM in VMware to serve as the dedicated endpoint for the upcoming MD-102 / endpoint-management integration work
