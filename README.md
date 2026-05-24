@@ -162,6 +162,7 @@ Related docs:
 ## 🗺️ Roadmap
 
 ### Current focus
+- Integrate a Windows 11 endpoint into the Cyberlab using Microsoft Entra / Intune workflows, with endpoint telemetry visible in Splunk
 - Convert existing detections into Sigma rules to make detection logic more portable and tool-agnostic
 - Generate a MITRE ATT&CK Navigator coverage layer to visualise current detection coverage
 - Add 2–3 small detections inspired by MD-102 study, especially around Windows endpoint and administration activity

@@ -5,6 +5,16 @@ Entries are added as new components are installed, tested, or refined.
 
 
 ---
+## 24-05-2026
+Started the MD-102 tenant-side setup on the Plan B path.
+- Accessed the Azure / Microsoft Entra environment and confirmed a working free Entra tenant
+- Renamed the tenant display name to Cyberlab
+- Created one test user and one security group, then added the user to the group
+- Reviewed Entra sign-in logs to confirm successful portal activity
+- Confirmed current limitations of this setup: no assignable licences visible, and Microsoft 365 Admin Center access is blocked in the current personal-account context
+
+![Entra sign-in logs - Cyberlab](/assets/md102_entra_signin_logs.png)
+
 ## 05-05-2026
 MD-102 Endpoint Telemetry Added + Developer Sandbox Attempt Failed.
 - Installed Splunk Universal Forwarder on MD102-W11-01
